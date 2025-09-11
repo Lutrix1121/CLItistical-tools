@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 from scipy.stats import mannwhitneyu
 import argparse
+from datetime import datetime
+import os
 
 def perform_mann_whitney_test(csv_file1, csv_file2=None, column=None, column1=None, column2=None,
                              grouping_variable=None, group1=None, group2=None, 
@@ -41,7 +43,6 @@ def perform_mann_whitney_test(csv_file1, csv_file2=None, column=None, column1=No
             if column not in data2.columns:
                 raise ValueError(f"Column '{column}' does not exist in the second dataset.")
             
-            # Get column values from both files
             values_group1 = data1[column].dropna().values
             values_group2 = data2[column].dropna().values
             
@@ -71,7 +72,6 @@ def perform_mann_whitney_test(csv_file1, csv_file2=None, column=None, column1=No
                 if data_group2.empty:
                     raise ValueError(f"No data for group '{group2}'.")
                 
-                # Get column values
                 if column is not None:
                     if column not in data.columns:
                         raise ValueError(f"Column '{column}' does not exist in the dataset.")
@@ -91,7 +91,6 @@ def perform_mann_whitney_test(csv_file1, csv_file2=None, column=None, column1=No
                 description_group2 = f"Group: {group2}, {column_description}"
             
             else:
-                # Two-column comparison mode without grouping
                 if column1 is None or column2 is None:
                     raise ValueError("When comparing two columns from one file, you must specify both column names ('column1' and 'column2' parameters).")
                 
@@ -107,14 +106,11 @@ def perform_mann_whitney_test(csv_file1, csv_file2=None, column=None, column1=No
                 description_group1 = f"Column: {column1}"
                 description_group2 = f"Column: {column2}"
         
-        # Check if we have sufficient data
         if len(values_group1) < 2 or len(values_group2) < 2:
             raise ValueError("Each group must contain at least 2 observations.")
         
-        # Perform Mann-Whitney U test
         u_statistic, p_value = mannwhitneyu(values_group1, values_group2, alternative=alternative)
         
-        # Prepare results
         results = {
             'u_statistic': u_statistic,
             'p_value': p_value,
@@ -134,6 +130,61 @@ def perform_mann_whitney_test(csv_file1, csv_file2=None, column=None, column1=No
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         return None
+
+def print_results(results, output_file=None, alpha=0.05):
+    """
+    Print Mann-Whitney U test results to console and optionally to a file.
+    
+    Parameters:
+    results (dict): Test results from perform_mann_whitney_test function.
+    output_file (str, optional): Path to output file for saving results.
+    alpha (float, optional): Significance level for interpretation (default: 0.05).
+    """
+    if results is None:
+        print("No results to display.")
+        return
+    
+    output_lines = []
+    output_lines.append("Mann-Whitney U Test Results:")
+    output_lines.append("=" * 60)
+    output_lines.append(f"Analysis performed on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    output_lines.append("-" * 60)
+    output_lines.append(f"Group 1: {results['description_group1']}")
+    output_lines.append(f"Group 2: {results['description_group2']}")
+    output_lines.append("-" * 60)
+    output_lines.append(f"U Statistic: {results['u_statistic']:.4f}")
+    output_lines.append(f"P-value: {results['p_value']:.4f}")
+    output_lines.append(f"Alternative hypothesis: {results['alternative_hypothesis']}")
+    output_lines.append("-" * 60)
+    output_lines.append(f"Sample size 1: {results['sample_size_1']}")
+    output_lines.append(f"Sample size 2: {results['sample_size_2']}")
+    output_lines.append("-" * 60)
+    output_lines.append(f"Mean group 1: {results['mean_group1']:.4f}")
+    output_lines.append(f"Mean group 2: {results['mean_group2']:.4f}")
+    output_lines.append(f"Median group 1: {results['median_group1']:.4f}")
+    output_lines.append(f"Median group 2: {results['median_group2']:.4f}")
+    output_lines.append("-" * 60)
+    
+    if results['p_value'] < alpha:
+        output_lines.append(f"At significance level α = {alpha}, we reject the null hypothesis.")
+        output_lines.append("There is a statistically significant difference between groups.")
+    else:
+        output_lines.append(f"At significance level α = {alpha}, there is no basis to reject the null hypothesis.")
+        output_lines.append("There is no statistically significant difference between groups.")
+    
+    output_lines.append("=" * 60)
+    
+    for line in output_lines:
+        print(line)
+    
+    if output_file:
+        try:
+            with open(output_file, 'w', encoding='utf-8') as f:
+                f.write('\n'.join(output_lines))
+            print(f"\nResults saved to: {output_file}")
+	    os.startfile(output_file)
+        except Exception as e:
+            print(f"\nError saving results to file: {str(e)}")
 
 def main():
     parser = argparse.ArgumentParser(description='Mann-Whitney U test for data from CSV files')
@@ -157,6 +208,10 @@ def main():
     parser.add_argument('--alternative', type=str, default='two-sided', 
                         choices=['two-sided', 'less', 'greater'],
                         help='Alternative hypothesis (default: "two-sided")')
+    parser.add_argument('--output', type=str, default=None,
+                        help='Output file path to save results (optional)')
+    parser.add_argument('--alpha', type=float, default=0.05,
+                        help='Significance level for interpretation (default: 0.05)')
     
     args = parser.parse_args()
     
@@ -188,34 +243,7 @@ def main():
         args.grouping_variable, group1, group2, args.separator, args.alternative
     )
     
-    # Display results
-    if results:
-        print("\nMann-Whitney U Test Results:")
-        print("-" * 60)
-        print(f"Group 1: {results['description_group1']}")
-        print(f"Group 2: {results['description_group2']}")
-        print("-" * 60)
-        print(f"U Statistic: {results['u_statistic']:.4f}")
-        print(f"P-value: {results['p_value']:.4f}")
-        print(f"Alternative hypothesis: {results['alternative_hypothesis']}")
-        print("-" * 60)
-        print(f"Sample size 1: {results['sample_size_1']}")
-        print(f"Sample size 2: {results['sample_size_2']}")
-        print("-" * 60)
-        print(f"Mean group 1: {results['mean_group1']:.4f}")
-        print(f"Mean group 2: {results['mean_group2']:.4f}")
-        print(f"Median group 1: {results['median_group1']:.4f}")
-        print(f"Median group 2: {results['median_group2']:.4f}")
-        print("-" * 60)
-        
-        # Interpret results
-        alpha = 0.05
-        if results['p_value'] < alpha:
-            print(f"At significance level α = {alpha}, we reject the null hypothesis.")
-            print("There is a statistically significant difference between groups.")
-        else:
-            print(f"At significance level α = {alpha}, there is no basis to reject the null hypothesis.")
-            print("There is no statistically significant difference between groups.")
+    print_results(results, args.output, args.alpha)
 
 if __name__ == "__main__":
     main()
