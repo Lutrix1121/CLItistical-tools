@@ -28,22 +28,18 @@ def perform_friedman_test(csv_file, columns=None, alpha=0.05, separator=',',
         if data_format == 'wide':
             # Wide format: each column represents a condition
             if columns is None:
-                # Use all numeric columns
                 numeric_columns = df.select_dtypes(include=[np.number]).columns.tolist()
                 if len(numeric_columns) < 3:
                     raise ValueError("Need at least 3 conditions for Friedman test")
                 columns = numeric_columns
             else:
-                # Parse comma-separated column names
                 if isinstance(columns, str):
                     columns = [col.strip() for col in columns.split(',')]
                 
-                # Verify columns exist
                 missing_columns = [col for col in columns if col not in df.columns]
                 if missing_columns:
                     raise ValueError(f"Columns not found: {missing_columns}")
                 
-                # Check if columns are numeric
                 numeric_columns = [col for col in columns if df[col].dtype in ['int64', 'float64']]
                 if len(numeric_columns) < len(columns):
                     non_numeric = [col for col in columns if col not in numeric_columns]
