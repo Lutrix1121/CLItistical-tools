@@ -299,10 +299,6 @@ This project is open source and available for academic and research purposes.
 
 Contributions are welcome! Please ensure all statistical tests follow best practices and include comprehensive output.
 
-## Author
-
-Created by Lutrix1121
-
 ## Support
 
 For issues or questions, please open an issue on the GitHub repository.
