@@ -14,6 +14,7 @@ A comprehensive set of command-line statistical analysis tools for CSV data. Per
 ### Regression Analysis
 - **Linear Regression** - Multiple linear regression with diagnostics
 - **Logistic Regression** - Binary classification with performance metrics
+- **Polynomial regression** - With expanded feature space tracking and overfitting detection
 
 ### Data Visualization
 - **Histograms** - Distribution visualization with KDE
