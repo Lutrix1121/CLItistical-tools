@@ -5,24 +5,24 @@ A comprehensive set of command-line statistical analysis tools for CSV data. Per
 ## Features
 
 ### Statistical Tests
-- **ANOVA** - One-way Analysis of Variance with post-hoc tests
-- **Chi-Square Test** - Test for independence and goodness of fit
-- **Friedman Test** - Non-parametric repeated measures test
-- **Mann-Whitney U Test** - Non-parametric test for two independent samples
-- **Power Analysis** - Calculate sample size, effect size, or statistical power
+- **ANOVA** - One-way Analysis of Variance with post-hoc tests,
+- **Chi-Square Test** - Test for independence and goodness of fit,
+- **Friedman Test** - Non-parametric repeated measures test,
+- **Mann-Whitney U Test** - Non-parametric test for two independent samples,
+- **Power Analysis** - Calculate sample size, effect size, or statistical power;
 
 ### Regression Analysis
-- **Linear Regression** - Multiple linear regression with diagnostics
-- **Logistic Regression** - Binary classification with performance metrics
-- **Polynomial regression** - With expanded feature space tracking and overfitting detection
+- **Linear Regression** - Multiple linear regression with diagnostics,
+- **Logistic Regression** - Binary classification with performance metrics,
+- **Polynomial regression** - With expanded feature space tracking and overfitting detection;
 
 ### Data Visualization
-- **Histograms** - Distribution visualization with KDE
-- **Dependency Graphs** - Scatter plots and regression plots
-- **Mean Comparison Graphs** - Compare statistics across multiple columns
+- **Histograms** - Distribution visualization with KDE,
+- **Dependency Graphs** - Scatter plots and regression plots,
+- **Mean Comparison Graphs** - Compare statistics across multiple columns;
 
 ### Descriptive Statistics
-- **Basic Statistics** - Comprehensive statistical summaries for CSV files
+- **Basic Statistics** - Comprehensive statistical summaries for CSV files;
 
 ## Requirements
 
@@ -45,10 +45,10 @@ python anova_script.py data.csv value_column --data_format long --group_col grou
 ```
 
 **Options:**
-- `--alpha`: Significance level (default: 0.05)
-- `--separator`: CSV separator (default: ",")
-- `--output`: Save results to file
-- `--no_assumptions`: Skip assumption checking
+- `--alpha`: Significance level (default: 0.05),
+- `--separator`: CSV separator (default: ","),
+- `--output`: Save results to file,
+- `--no_assumptions`: Skip assumption checking;
 
 ### Chi-Square Test
 
@@ -63,9 +63,9 @@ python chi_square_test.py data.csv column1 --test_type goodness_of_fit
 ```
 
 **Options:**
-- `--separator`: CSV separator (default: ",")
-- `--alpha`: Significance level (default: 0.05)
-- `--output`: Save results to file
+- `--separator`: CSV separator (default: ","),
+- `--alpha`: Significance level (default: 0.05),
+- `--output`: Save results to file;
 
 ### Friedman Test
 
@@ -95,8 +95,8 @@ python mann_whitney_test.py data.csv --grouping_variable treatment --group1 cont
 ```
 
 **Options:**
-- `--alternative`: 'two-sided', 'less', 'greater' (default: 'two-sided')
-- `--separator`: CSV separator (default: ",")
+- `--alternative`: 'two-sided', 'less', 'greater' (default: 'two-sided'),
+- `--separator`: CSV separator (default: ",");
 
 ### Linear Regression
 
@@ -110,10 +110,10 @@ python linear_regression_tool.py data.csv target_column
 ```
 
 **Options:**
-- `--test_size`: Train/test split ratio (default: 0.2)
-- `--no_standardize`: Don't standardize features
-- `--separator`: CSV separator (default: ",")
-- `--output`: Save results to file
+- `--test_size`: Train/test split ratio (default: 0.2),
+- `--no_standardize`: Don't standardize features,
+- `--separator`: CSV separator (default: ","),
+- `--output`: Save results to file;
 
 ### Logistic Regression
 
@@ -124,9 +124,9 @@ python logistic_regression_tool.py data.csv target_column --predictor_columns fe
 ```
 
 **Options:**
-- `--test_size`: Train/test split ratio (default: 0.2)
-- `--solver`: Optimization algorithm (default: 'lbfgs')
-- `--max_iter`: Maximum iterations (default: 1000)
+- `--test_size`: Train/test split ratio (default: 0.2),
+- `--solver`: Optimization algorithm (default: 'lbfgs'),
+- `--max_iter`: Maximum iterations (default: 1000);
 
 ### Power Analysis
 
@@ -144,10 +144,10 @@ python power_analysis.py chisquare --sample_size 100 --power 0.8 --df 2
 ```
 
 **Test Types:**
-- `ttest`: T-test (one-sample, two-sample, paired)
-- `anova`: One-way ANOVA
-- `chisquare`: Chi-square test
-- `correlation`: Correlation test
+- `ttest`: T-test (one-sample, two-sample, paired),
+- `anova`: One-way ANOVA,
+- `chisquare`: Chi-square test,
+- `correlation`: Correlation test;
 
 ### Histogram
 
@@ -158,10 +158,10 @@ python histogram.py data.csv column_name --bins 30 -o histogram.png
 ```
 
 **Options:**
-- `--bins`: Number of bins (default: 30)
-- `--no-kde`: Disable kernel density estimate
-- `--color`: Histogram color (default: 'skyblue')
-- `--separator`: CSV separator (default: ",")
+- `--bins`: Number of bins (default: 30),
+- `--no-kde`: Disable kernel density estimate,
+- `--color`: Histogram color (default: 'skyblue'),
+- `--separator`: CSV separator (default: ",");
 
 ### Dependency Graph
 
@@ -175,15 +175,15 @@ python dependency_graph.py data.csv x_column y_column --regression --correlation
 ```
 
 **Plot Types:**
-- `scatter`: Scatter plot (default)
-- `reg`: Regression plot
-- `hex`: Hexbin plot
-- `kde`: Kernel density estimate plot
+- `scatter`: Scatter plot (default),
+- `reg`: Regression plot,
+- `hex`: Hexbin plot,
+- `kde`: Kernel density estimate plot;
 
 **Options:**
-- `--plot-type`: Type of visualization
-- `--regression`: Show regression line
-- `--correlation`: Display correlation statistics
+- `--plot-type`: Type of visualization,
+- `--regression`: Show regression line,
+- `--correlation`: Display correlation statistics;
 
 ### Mean Comparison Graph
 
@@ -200,10 +200,10 @@ python mean_comparison_graph.py data.csv col1 col2 --type mean --group-by catego
 ```
 
 **Statistics Types:**
-- `mean`: Compare means
-- `std`: Compare standard deviations
-- `variance`: Compare variances
-- `all`: Show all three statistics
+- `mean`: Compare means,
+- `std`: Compare standard deviations,
+- `variance`: Compare variances,
+- `all`: Show all three statistics;
 
 ### Basic Statistics
 
@@ -219,21 +219,21 @@ python basic_statistics.py data.csv ";" "zip_code,product_id"
 ## Output
 
 All statistical tests provide detailed output including:
-- Test statistics and p-values
-- Effect sizes and confidence intervals
-- Assumption checks (when applicable)
-- Post-hoc analyses (when significant)
-- Clear interpretations and recommendations
+- Test statistics and p-values,
+- Effect sizes and confidence intervals,
+- Assumption checks (when applicable),
+- Post-hoc analyses (when significant),
+- Clear interpretations and recommendations;
 
 Results can be saved to text files using the `--output` parameter.
 
 ## Data Format
 
 ### CSV Requirements
-- First row should contain column headers
-- Numeric columns for quantitative analyses
-- Categorical columns for chi-square and grouping variables
-- Missing values are automatically handled (rows removed)
+- First row should contain column headers,
+- Numeric columns for quantitative analyses,
+- Categorical columns for chi-square and grouping variables,
+- Missing values are automatically handled (rows removed);
 
 ### Wide vs Long Format
 
