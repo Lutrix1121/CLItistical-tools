@@ -4,24 +4,24 @@ A comprehensive set of command-line statistical analysis tools for CSV data. Per
 
 ## Features
 
-### Statistical Tests
+### Statistical Tests:
 - **ANOVA** - One-way Analysis of Variance with post-hoc tests,
 - **Chi-Square Test** - Test for independence and goodness of fit,
 - **Friedman Test** - Non-parametric repeated measures test,
 - **Mann-Whitney U Test** - Non-parametric test for two independent samples,
 - **Power Analysis** - Calculate sample size, effect size, or statistical power;
 
-### Regression Analysis
+### Regression Analysis:
 - **Linear Regression** - Multiple linear regression with diagnostics,
 - **Logistic Regression** - Binary classification with performance metrics,
 - **Polynomial regression** - With expanded feature space tracking and overfitting detection;
 
-### Data Visualization
+### Data Visualization:
 - **Histograms** - Distribution visualization with KDE,
 - **Dependency Graphs** - Scatter plots and regression plots,
 - **Mean Comparison Graphs** - Compare statistics across multiple columns;
 
-### Descriptive Statistics
+### Descriptive Statistics:
 - **Basic Statistics** - Comprehensive statistical summaries for CSV files;
 
 ## Requirements
@@ -32,7 +32,7 @@ pip install pandas numpy scipy scikit-learn seaborn matplotlib
 
 ## Usage
 
-### ANOVA Test
+### ANOVA Test:
 
 Perform one-way ANOVA to compare means across multiple groups:
 
@@ -50,7 +50,7 @@ python anova_script.py data.csv value_column --data_format long --group_col grou
 - `--output`: Save results to file,
 - `--no_assumptions`: Skip assumption checking;
 
-### Chi-Square Test
+### Chi-Square Test:
 
 Test for association between categorical variables:
 
@@ -67,7 +67,7 @@ python chi_square_test.py data.csv column1 --test_type goodness_of_fit
 - `--alpha`: Significance level (default: 0.05),
 - `--output`: Save results to file;
 
-### Friedman Test
+### Friedman Test:
 
 Non-parametric repeated measures test:
 
@@ -79,7 +79,7 @@ python friedman_test.py data.csv "condition1,condition2,condition3"
 python friedman_test.py data.csv condition_col --data_format long --subject_col subject_id
 ```
 
-### Mann-Whitney U Test
+### Mann-Whitney U Test:
 
 Compare two independent samples:
 
@@ -98,7 +98,7 @@ python mann_whitney_test.py data.csv --grouping_variable treatment --group1 cont
 - `--alternative`: 'two-sided', 'less', 'greater' (default: 'two-sided'),
 - `--separator`: CSV separator (default: ",");
 
-### Linear Regression
+### Linear Regression:
 
 Build predictive models:
 
@@ -115,7 +115,7 @@ python linear_regression_tool.py data.csv target_column
 - `--separator`: CSV separator (default: ","),
 - `--output`: Save results to file;
 
-### Logistic Regression
+### Logistic Regression:
 
 Binary classification:
 
@@ -128,7 +128,7 @@ python logistic_regression_tool.py data.csv target_column --predictor_columns fe
 - `--solver`: Optimization algorithm (default: 'lbfgs'),
 - `--max_iter`: Maximum iterations (default: 1000);
 
-### Power Analysis
+### Power Analysis:
 
 Calculate sample size, effect size, or power:
 
@@ -149,7 +149,7 @@ python power_analysis.py chisquare --sample_size 100 --power 0.8 --df 2
 - `chisquare`: Chi-square test,
 - `correlation`: Correlation test;
 
-### Histogram
+### Histogram:
 
 Create distribution visualizations:
 
@@ -163,7 +163,7 @@ python histogram.py data.csv column_name --bins 30 -o histogram.png
 - `--color`: Histogram color (default: 'skyblue'),
 - `--separator`: CSV separator (default: ",");
 
-### Dependency Graph
+### Dependency Graph:
 
 Visualize relationships between variables:
 
@@ -185,7 +185,7 @@ python dependency_graph.py data.csv x_column y_column --regression --correlation
 - `--regression`: Show regression line,
 - `--correlation`: Display correlation statistics;
 
-### Mean Comparison Graph
+### Mean Comparison Graph:
 
 Compare statistics across multiple columns:
 
@@ -205,7 +205,7 @@ python mean_comparison_graph.py data.csv col1 col2 --type mean --group-by catego
 - `variance`: Compare variances,
 - `all`: Show all three statistics;
 
-### Basic Statistics
+### Basic Statistics:
 
 Generate comprehensive statistical summaries:
 
@@ -235,7 +235,7 @@ Results can be saved to text files using the `--output` parameter.
 - Categorical columns for chi-square and grouping variables,
 - Missing values are automatically handled (rows removed);
 
-### Wide vs Long Format
+### Wide vs Long Format:
 
 **Wide Format** (default for most tests):
 ```
