@@ -34,7 +34,7 @@ pip install pandas numpy scipy scikit-learn seaborn matplotlib
 
 ### ANOVA Test:
 
-Perform one-way ANOVA to compare means across multiple groups:
+Perform one-way ANOVA to compare means across multiple groups
 
 ```bash
 # Wide format (each column is a group)
@@ -52,7 +52,7 @@ python anova_script.py data.csv value_column --data_format long --group_col grou
 
 ### Chi-Square Test:
 
-Test for association between categorical variables:
+Test for association between categorical variables
 
 ```bash
 # Test of independence
@@ -69,7 +69,7 @@ python chi_square_test.py data.csv column1 --test_type goodness_of_fit
 
 ### Friedman Test:
 
-Non-parametric repeated measures test:
+Non-parametric repeated measures test
 
 ```bash
 # Wide format
@@ -81,7 +81,7 @@ python friedman_test.py data.csv condition_col --data_format long --subject_col 
 
 ### Mann-Whitney U Test:
 
-Compare two independent samples:
+Compare two independent samples
 
 ```bash
 # Two columns from one file
@@ -100,7 +100,7 @@ python mann_whitney_test.py data.csv --grouping_variable treatment --group1 cont
 
 ### Linear Regression:
 
-Build predictive models:
+Build predictive models
 
 ```bash
 python linear_regression_tool.py data.csv target_column --predictor_columns feature1 feature2 feature3
@@ -117,7 +117,7 @@ python linear_regression_tool.py data.csv target_column
 
 ### Logistic Regression:
 
-Binary classification:
+Binary classification
 
 ```bash
 python logistic_regression_tool.py data.csv target_column --predictor_columns feature1 feature2
@@ -130,7 +130,7 @@ python logistic_regression_tool.py data.csv target_column --predictor_columns fe
 
 ### Power Analysis:
 
-Calculate sample size, effect size, or power:
+Calculate sample size, effect size, or power
 
 ```bash
 # Calculate required sample size for t-test
@@ -151,7 +151,7 @@ python power_analysis.py chisquare --sample_size 100 --power 0.8 --df 2
 
 ### Histogram:
 
-Create distribution visualizations:
+Create distribution visualizations
 
 ```bash
 python histogram.py data.csv column_name --bins 30 -o histogram.png
@@ -165,7 +165,7 @@ python histogram.py data.csv column_name --bins 30 -o histogram.png
 
 ### Dependency Graph:
 
-Visualize relationships between variables:
+Visualize relationships between variables
 
 ```bash
 python dependency_graph.py data.csv x_column y_column -o graph.png
@@ -187,7 +187,7 @@ python dependency_graph.py data.csv x_column y_column --regression --correlation
 
 ### Mean Comparison Graph:
 
-Compare statistics across multiple columns:
+Compare statistics across multiple columns
 
 ```bash
 python mean_comparison_graph.py data.csv col1 col2 col3 --type mean -o comparison.png
@@ -207,7 +207,7 @@ python mean_comparison_graph.py data.csv col1 col2 --type mean --group-by catego
 
 ### Basic Statistics:
 
-Generate comprehensive statistical summaries:
+Generate comprehensive statistical summaries
 
 ```bash
 python basic_statistics.py data.csv ";" --output statistics.txt
@@ -216,7 +216,7 @@ python basic_statistics.py data.csv ";" --output statistics.txt
 python basic_statistics.py data.csv ";" "zip_code,product_id"
 ```
 
-## Output
+## Output:
 
 All statistical tests provide detailed output including:
 - Test statistics and p-values,
@@ -227,9 +227,9 @@ All statistical tests provide detailed output including:
 
 Results can be saved to text files using the `--output` parameter.
 
-## Data Format
+## Data Format:
 
-### CSV Requirements
+### CSV Requirements:
 - First row should contain column headers,
 - Numeric columns for quantitative analyses,
 - Categorical columns for chi-square and grouping variables,
@@ -252,7 +252,7 @@ Subject, Condition, Value
 1,       Cond3,     28
 ```
 
-## Examples
+## Examples:
 
 ### Complete ANOVA Analysis
 ```bash
@@ -284,7 +284,7 @@ python power_analysis.py ttest \
   --output power_analysis.txt
 ```
 
-## Tips
+## Tips:
 
 1. **Check assumptions**: Most tests include automatic assumption checking
 2. **Save outputs**: Use `--output` to save detailed results
