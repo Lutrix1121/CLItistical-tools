@@ -11,7 +11,8 @@ A comprehensive set of command-line statistical analysis tools for CSV data. Per
 - **Mann-Whitney U Test** - Non-parametric test for two independent samples,
 - **Power Analysis** - Calculate sample size, effect size, or statistical power;
 
-### Regression Analysis:
+### Machine Learning:
+- **ML Classifier** - Multiple classification algorithms with comprehensive evaluation,
 - **Linear Regression** - Multiple linear regression with diagnostics,
 - **Logistic Regression** - Binary classification with performance metrics,
 - **Polynomial regression** - With expanded feature space tracking and overfitting detection;
@@ -31,6 +32,54 @@ pip install pandas numpy scipy scikit-learn seaborn matplotlib
 ```
 
 ## Usage
+
+### ML Classifier Tool:
+
+Advanced machine learning classification with multiple algorithms and comprehensive evaluation
+
+```bash
+# Single algorithm classification
+python ml_classifier_tool.py data.csv target_column --algorithm random_forest
+
+# Compare all algorithms
+python ml_classifier_tool.py data.csv target_column --algorithm all
+
+# With specific predictor columns
+python ml_classifier_tool.py data.csv target_column --algorithm gradient_boost --predictor_columns feature1 feature2 feature3
+
+# With cross-validation
+python ml_classifier_tool.py data.csv target_column --algorithm svm --cross_validation --cv_folds 10
+```
+
+**Available Algorithms:**
+- `logistic`: Logistic Regression - Fast, interpretable baseline
+- `decision_tree`: Decision Tree - Non-linear, interpretable
+- `random_forest`: Random Forest - Ensemble method, handles non-linearity well
+- `gradient_boost`: Gradient Boosting - Often highest accuracy
+- `svm`: Support Vector Machine - Effective in high-dimensional spaces
+- `knn`: K-Nearest Neighbors - Simple, non-parametric
+- `naive_bayes`: Naive Bayes - Fast, works well with small datasets
+- `neural_network`: Multi-Layer Perceptron - Deep learning approach
+- `all`: Run all algorithms and compare performance
+
+**Options:**
+- `--predictor_columns`: Specify features (default: all numeric columns),
+- `--test_size`: Train/test split ratio (default: 0.2),
+- `--random_state`: Set seed for reproducibility (default: 42),
+- `--no_standardize`: Skip feature standardization,
+- `--cross_validation`: Perform k-fold cross-validation,
+- `--cv_folds`: Number of CV folds (default: 5),
+- `--separator`: CSV separator (default: ","),
+- `--output`: Save results to file;
+
+**Output Includes:**
+- Accuracy, Precision, Recall, F1-Score (train and test)
+- Confusion Matrix
+- Classification Report per class
+- Feature Importance/Coefficients
+- Cross-validation scores (if enabled)
+- Overfitting detection
+- Performance recommendations
 
 ### ANOVA Test:
 
@@ -254,6 +303,24 @@ Subject, Condition, Value
 
 ## Examples:
 
+### ML Classification Workflow
+```bash
+# Quick single algorithm test
+python ml_classifier_tool.py customer_data.csv churn --algorithm random_forest --output rf_results.txt
+
+# Compare all algorithms to find the best
+python ml_classifier_tool.py customer_data.csv churn --algorithm all --cross_validation --output comparison.txt
+
+# Fine-tuned analysis with specific features
+python ml_classifier_tool.py customer_data.csv churn \
+  --algorithm gradient_boost \
+  --predictor_columns age income purchase_frequency tenure \
+  --test_size 0.25 \
+  --cross_validation \
+  --cv_folds 10 \
+  --output final_model.txt
+```
+
 ### Complete ANOVA Analysis
 ```bash
 python anova_script.py experiment.csv "control,treatment1,treatment2" \
@@ -291,6 +358,10 @@ python power_analysis.py ttest \
 3. **Visualize first**: Create histograms and dependency graphs before running tests
 4. **Choose appropriate tests**: Use non-parametric tests (Friedman, Mann-Whitney) when assumptions are violated
 5. **Consider effect sizes**: Statistical significance ≠ practical significance
+6. **Algorithm selection**: Start with `--algorithm all` to compare, then focus on best performers
+7. **Feature engineering**: The ML classifier handles categorical encoding automatically
+8. **Cross-validation**: Always use `--cross_validation` for robust performance estimates
+9. **Overfitting check**: Monitor train vs test performance differences
 
 ## License
 
