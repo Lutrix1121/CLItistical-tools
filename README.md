@@ -452,17 +452,14 @@ python power_analysis.py ttest \
 
 1. **Check assumptions**: Most tests include automatic assumption checking
 2. **Save outputs**: Use `--output` to save detailed results
-3. **Visualize first**: Create histograms and dependency graphs before running tests
-4. **Choose appropriate tests**: Use non-parametric tests (Friedman, Mann-Whitney) when assumptions are violated
-5. **Consider effect sizes**: Statistical significance ≠ practical significance
-6. **Algorithm selection**: Start with `--algorithm all` to compare, then focus on best performers
-7. **Feature engineering**: ML tools handle categorical encoding automatically
-8. **Cross-validation**: Always use `--cross_validation` for robust performance estimates
-9. **Overfitting check**: Monitor train vs test performance differences
-10. **Clustering validation**: Use elbow and silhouette analysis to determine optimal number of clusters
-11. **Standardization**: Always standardize features for distance-based algorithms (K-Means, DBSCAN, K-Medoids)
-12. **DBSCAN tuning**: Adjust `eps` based on your data scale and density
-13. **Cluster interpretation**: Use visualization and feature heatmaps to understand cluster characteristics
+3. **Choose appropriate tests**: Use non-parametric tests (Friedman, Mann-Whitney) when assumptions are violated
+4. **Consider effect sizes**: Statistical significance ≠ practical significance
+5. **Algorithm selection**: Start with `--algorithm all` to compare, then focus on best performers
+6. **Feature engineering**: ML tools handle categorical encoding automatically
+7. **Cross-validation**: Always use `--cross_validation` for robust performance estimates
+8. **Overfitting check**: Monitor train vs test performance differences
+9. **Clustering validation**: Use elbow and silhouette analysis to determine optimal number of clusters
+10. **Standardization**: Always standardize features for distance-based algorithms (K-Means, DBSCAN, K-Medoids)
 
 ## License
 
