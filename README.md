@@ -13,6 +13,7 @@ A comprehensive set of command-line statistical analysis tools for CSV data. Per
 
 ### Machine Learning:
 - **ML Classifier** - Multiple classification algorithms with comprehensive evaluation,
+- **ML Clustering** - Unsupervised clustering with multiple algorithms and visualizations,
 - **Linear Regression** - Multiple linear regression with diagnostics,
 - **Logistic Regression** - Binary classification with performance metrics,
 - **Polynomial regression** - With expanded feature space tracking and overfitting detection;
@@ -28,10 +29,72 @@ A comprehensive set of command-line statistical analysis tools for CSV data. Per
 ## Requirements
 
 ```bash
-pip install pandas numpy scipy scikit-learn seaborn matplotlib
+pip install pandas numpy scipy scikit-learn scikit-learn-extra seaborn matplotlib
 ```
 
 ## Usage
+
+### ML Clustering Tool:
+
+Discover natural groupings in your data using various clustering algorithms
+
+```bash
+# K-Means clustering with 3 clusters
+python ml_clustering_tool.py data.csv --algorithm kmeans --n_clusters 3
+
+# DBSCAN density-based clustering
+python ml_clustering_tool.py data.csv --algorithm dbscan --eps 0.5 --min_samples 5
+
+# Agglomerative hierarchical clustering
+python ml_clustering_tool.py data.csv --algorithm agglomerative --n_clusters 4 --linkage complete
+
+# K-Medoids clustering (more robust to outliers)
+python ml_clustering_tool.py data.csv --algorithm kmedoids --n_clusters 3
+
+# With specific feature columns
+python ml_clustering_tool.py data.csv --algorithm kmeans --n_clusters 3 --feature_columns age income spending_score
+
+# Find optimal number of clusters with elbow and silhouette analysis
+python ml_clustering_tool.py data.csv --algorithm kmeans --elbow_analysis --silhouette_analysis
+
+# Complete analysis with visualizations
+python ml_clustering_tool.py data.csv --algorithm kmeans --n_clusters 3 --visualize --output results.txt --output_data clustered_data.csv
+```
+
+**Available Algorithms:**
+- `kmeans`: K-Means - Fast, efficient partitioning method
+- `kmedoids`: K-Medoids - Similar to K-Means but more robust to outliers
+- `agglomerative`: Agglomerative Hierarchical - Bottom-up hierarchical clustering
+- `dbscan`: DBSCAN - Density-based, can find arbitrary shapes and outliers
+
+**Options:**
+- `--n_clusters`: Number of clusters (default: 3, not used for DBSCAN),
+- `--feature_columns`: Specify features (default: all numeric columns),
+- `--no_standardize`: Skip feature standardization,
+- `--separator`: CSV separator (default: ","),
+- `--random_state`: Set seed for reproducibility (default: 42),
+- `--eps`: DBSCAN epsilon parameter - maximum distance between points (default: 0.5),
+- `--min_samples`: DBSCAN minimum samples per cluster (default: 5),
+- `--linkage`: Hierarchical linkage method: ward, complete, average, single (default: ward),
+- `--elbow_analysis`: Perform elbow method to find optimal K,
+- `--silhouette_analysis`: Perform silhouette analysis to find optimal K,
+- `--visualize`: Create PCA plots, cluster distributions, and heatmaps,
+- `--output`: Save results to file,
+- `--output_data`: Save original data with cluster assignments;
+
+**Output Includes:**
+- Number of clusters found
+- Cluster sizes and distribution
+- Silhouette Score (cluster separation quality)
+- Calinski-Harabasz Score (cluster density)
+- Davies-Bouldin Score (cluster similarity)
+- Within-cluster sum of squares (inertia)
+- Cluster statistics (means and standard deviations)
+- Optimal K recommendations (with elbow/silhouette analysis)
+- Quality interpretation and warnings
+- PCA visualization plots
+- Cluster distribution charts
+- Feature importance heatmaps
 
 ### ML Classifier Tool:
 
@@ -303,6 +366,40 @@ Subject, Condition, Value
 
 ## Examples:
 
+### ML Clustering Workflow
+```bash
+# Quick K-Means clustering
+python ml_clustering_tool.py customer_data.csv --algorithm kmeans --n_clusters 3 --output kmeans_results.txt
+
+# Find optimal number of clusters
+python ml_clustering_tool.py customer_data.csv --algorithm kmeans --elbow_analysis --silhouette_analysis
+
+# Complete clustering analysis with visualizations
+python ml_clustering_tool.py customer_data.csv \
+  --algorithm kmeans \
+  --n_clusters 4 \
+  --feature_columns age income purchase_frequency recency \
+  --visualize \
+  --output cluster_analysis.txt \
+  --output_data customers_with_clusters.csv
+
+# Density-based clustering to find outliers
+python ml_clustering_tool.py sensor_data.csv \
+  --algorithm dbscan \
+  --eps 0.3 \
+  --min_samples 10 \
+  --visualize \
+  --output outlier_detection.txt
+
+# Hierarchical clustering with complete linkage
+python ml_clustering_tool.py gene_expression.csv \
+  --algorithm agglomerative \
+  --n_clusters 5 \
+  --linkage complete \
+  --visualize \
+  --output hierarchical_results.txt
+```
+
 ### ML Classification Workflow
 ```bash
 # Quick single algorithm test
@@ -359,9 +456,13 @@ python power_analysis.py ttest \
 4. **Choose appropriate tests**: Use non-parametric tests (Friedman, Mann-Whitney) when assumptions are violated
 5. **Consider effect sizes**: Statistical significance ≠ practical significance
 6. **Algorithm selection**: Start with `--algorithm all` to compare, then focus on best performers
-7. **Feature engineering**: The ML classifier handles categorical encoding automatically
+7. **Feature engineering**: ML tools handle categorical encoding automatically
 8. **Cross-validation**: Always use `--cross_validation` for robust performance estimates
 9. **Overfitting check**: Monitor train vs test performance differences
+10. **Clustering validation**: Use elbow and silhouette analysis to determine optimal number of clusters
+11. **Standardization**: Always standardize features for distance-based algorithms (K-Means, DBSCAN, K-Medoids)
+12. **DBSCAN tuning**: Adjust `eps` based on your data scale and density
+13. **Cluster interpretation**: Use visualization and feature heatmaps to understand cluster characteristics
 
 ## License
 
